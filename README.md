@@ -1,5 +1,5 @@
 <p align="center">
- <img src="https://angular.io/assets/images/logos/angular/angular.svg" />
+ <img width="200" src="https://angular.io/assets/images/logos/angular/angular.svg" />
 </p>
 
 
