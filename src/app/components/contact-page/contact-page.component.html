@@ -1,0 +1,203 @@
+<div class="row mt-5 mb-2 d-flex justify-content-center image-container">
+  <div class="col-4 text-center">
+    <img width="200" alt="logo" src="assets/images/logo.png" />
+  </div>
+</div>
+
+<div class="row mb-5 d-flex justify-content-center">
+  <div class="form-panel col-5 panel panel-default">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h1 class="mt-5">Wypełnij formularz</h1>
+      <h4 class="mb-5">
+        Skontaktujemy się z Tobą najszybciej jak to będzie możliwe
+      </h4>
+      <div class="main-fields">
+        <div class="form-group">
+          <label for="companyName">Nazwa firmy/ Imię i nazwisko</label>
+          <input
+            formControlName="companyName"
+            type="text"
+            id="companyName"
+            class="form-control"
+            placeholder="np Apple"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="identyficationNumber" class="required">Numer NIP</label>
+          <input
+            formControlName="identyficationNumber"
+            type="text"
+            id="identyficationNumber"
+            class="form-control"
+            placeholder="123-45-67-890"
+            [ngClass]="{
+              'is-invalid':
+                submitted && form.controls.identyficationNumber.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && form.controls.identyficationNumber.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="form.controls.identyficationNumber.errors.nip">
+              Nip jest nieprawidłowy
+            </div>
+            <div *ngIf="form.controls.identyficationNumber.errors.required">
+              Nip jest wymagany
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="required">E-mail</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            placeholder="example@email.com"
+            formControlName="email"
+            [ngClass]="{
+              'is-invalid': submitted && form.controls.email.errors
+            }"
+          />
+
+          <div
+            *ngIf="submitted && form.controls.email.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="form.controls.email.errors.email">
+              Email jest niepoprawny
+            </div>
+            <div *ngIf="form.controls.email.errors.required">
+              Email jest wymagany
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Numer telefonu</label>
+          <input
+            formControlName="phoneNumber"
+            type="text"
+            id="phoneNumber"
+            class="form-control"
+            placeholder="123 456 789"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="subject" class="required">Temat</label>
+          <input
+            type="text"
+            id="subject"
+            class="form-control"
+            formControlName="subject"
+            [ngClass]="{
+              'is-invalid': submitted && form.controls.subject.errors
+            }"
+            placeholder="Współpraca"
+          />
+          <div
+            *ngIf="submitted && form.controls.subject.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="form.controls.subject.errors.required">
+              Temat jest wymagany
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group py-4 d-flex">
+          <div class="col-7">
+            <label>Czy posiadasz prawo jazdy kategori B?</label>
+          </div>
+          <div class="col-5">
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input mt-2"
+                type="radio"
+                name="drivingLicense"
+                id="drivingLicenseYes"
+                value="true"
+                formControlName="drivingLicense"
+              />
+              <label class="form-check-label" for="drivingLicenseYes"
+                >Tak</label
+              >
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input mt-2"
+                type="radio"
+                name="drivingLicense"
+                id="drivingLicenseNo"
+                value="false"
+                formControlName="drivingLicense"
+              />
+              <label class="form-check-label" for="drivingLicenseNo">Nie</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Treść wiadomości</label>
+          <textarea
+            formControlName="message"
+            type="text"
+            id="message"
+            class="form-control"
+            placeholder="Dzień dobry"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="consent">
+        <div class="form-group bg-white">
+          <div class="form-check d-flex align-items-center">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              (click)="setAllConsent()"
+            />
+            <label class="form-check-label"> Zaznacz wszystkie zgody </label>
+          </div>
+
+          <div class="form-check d-flex align-items-center">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="personalConsents"
+              formControlName="personalConsents"
+            />
+            <label class="form-check-label align-middle" for="personalConsents">
+              Wyrażam zgodę na przetwarzanie moich danych osobowych podanych
+              przeze mnie w powyższym formularzu w celu kontaktowym.
+            </label>
+          </div>
+
+          <div class="form-check d-flex align-items-center">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="phoneContactConsents"
+              formControlName="phoneContactConsents"
+            />
+            <label
+              class="form-check-label align-middle"
+              for="phoneContactConsents"
+            >
+              Wyrażam zgodę na kontakt telefoniczny w sprawach marketingowych
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <button
+        class="btn btn-lg btn-success col-6 offset-3 mt-3 mb-5 p-3"
+        type="submit"
+      >
+        Wyślij wiadomość
+      </button>
+    </form>
+  </div>
+</div>
